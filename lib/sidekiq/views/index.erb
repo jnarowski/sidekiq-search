@@ -1,0 +1,41 @@
+<header class="row">
+  <div class="col-sm-5">
+    <h3><%= t('Search') %></h3>
+  </div>
+</header>
+  <form action="<%= root_path %>search" method="get">
+    <%= csrf_tag if respond_to?(:csrf_tag) %>
+    <div style="margin-bottom: 10px">
+      <input name="query" placeholder="Search" style="width: 250px" value="<%= params['query'] %>" />
+      <select name="type" style='padding: 3px'>
+        <option value="job_id">Job ID</option>
+        <%# <option value="class_name">Class Name</option>
+        <option value="argument_name">Argument Name (slow)</option>
+        <option value="argument_value">Argument Value (slow)</option> %>
+      </select>
+      <button type='submit'>Search</button>
+    </div>
+    <table class="table table-striped table-bordered table-white">
+      <thead>
+        <tr>
+          <th><%= t('State') %></th>
+          <th><%= t('Queue') %></th>
+          <th><%= t('Worker') %></th>
+          <th><%= t('Arguments') %></th>
+          <th><%= t('Error') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs.each do |result| %>
+          <% job = result['job'] || {} %>
+          <tr>
+            <td><%= result['state'] %></td>
+            <td><%= job['queue'] %></td>
+            <td><%= job['class'] %></td>
+            <td><%= job['args'] %></td>
+            <td><%= job['error_message'] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </form>

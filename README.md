@@ -1,1 +1,1 @@
-# sidekiq-search
+# Sidekiq::Search
