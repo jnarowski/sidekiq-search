@@ -6,15 +6,14 @@ end
 
 require "sidekiq/api"
 require "sidekiq/version"
-require_relative "./version"
-require_relative "./web_extension"
+require "sidekiq/search/version"
+require "sidekiq/search/web_extension"
 
 if defined?(Sidekiq::Web)
   Sidekiq::Web.register Sidekiq::Search::WebExtension
   Sidekiq::Web.tabs["Search"] = "search"
   Sidekiq::Web.settings.locales << File.join(File.dirname(__FILE__), "search/locales")
 end
-
 
 module Sidekiq
   module Search
