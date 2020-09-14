@@ -1,1 +1,1 @@
-require_relative "./sidekiq/search"
+require "sidekiq/search"
